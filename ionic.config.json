@@ -1,0 +1,8 @@
+{
+  "name": "MiRutinaFitness",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "8cbbfacb"
+}
