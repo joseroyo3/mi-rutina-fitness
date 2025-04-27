@@ -84,36 +84,4 @@ export class RoutineService {
       console.error('Error cargando rutinas:', error); // Captura errores en la carga
     }
   }
-
-  /**
-   * Elimina todas las rutinas almacenadas y limpia la lista en memoria
-   */
-  async eliminarTodasRoutines() {
-    try {
-      this.routines = []; // Vacía la lista en memoria
-      await Preferences.remove({ key: 'routines' }); // Elimina los datos almacenados
-      console.log('Todas las rutinas han sido eliminadas correctamente.');
-    } catch (error) {
-      console.error('Error eliminando todas las rutinas:', error); // Captura errores al eliminar
-    }
-  }
-
-  /**
-   * Agrega una lista predeterminada de 10 rutinas de ejercicio y las guarda
-   */
-  async agregar10Routines() {
-    this.routines.push(
-      new Routine(1, 'Flexiones', 20, false),
-      new Routine(2, 'Sentadillas', 30, false),
-      new Routine(3, 'Abdominales', 25, false),
-      new Routine(4, 'Plancha', 60, false), // 1 minuto
-      new Routine(5, 'Zancadas', 20, false),
-      new Routine(6, 'Burpees', 15, false),
-      new Routine(7, 'Saltos de tijera', 30, false),
-      new Routine(8, 'Mountain Climbers', 40, false),
-      new Routine(9, 'Fondos de tríceps', 15, false),
-      new Routine(10, 'Puente de glúteos', 20, false)
-    );
-    await this.guardarRoutines(); // Guarda la lista actualizada en Preferences
-  }
 }
