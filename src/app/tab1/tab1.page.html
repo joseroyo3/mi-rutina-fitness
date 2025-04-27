@@ -1,17 +1,59 @@
+<!-- Encabezado principal de la página -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Pestaña 1
+      Routine
+      <!-- Muestra el título fijo de la página: "Routine" -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal de la página -->
 <ion-content [fullscreen]="true">
+  <!-- Encabezado condensado que aparece al hacer scroll -->
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Mi pestaña</ion-title>
+      <ion-title size="large">Routine</ion-title>
+      <!-- Título de tamaño grande para destacar en el encabezado condensado -->
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!-- Lista de rutinas -->
+  <ion-list>
+    <!-- Componente deslizante para cada rutina -->
+    <ion-item-sliding *ngFor="let routine of routines; let i = index">
+      <!-- Elemento de la lista que representa una rutina -->
+      <ion-item (click)="marcarCompletado(i)">
+        <!-- Al hacer clic, se llama al método 'marcarCompletado' pasando el índice de la rutina -->
+
+        <!-- Checkbox para indicar si la rutina está completada -->
+        <ion-checkbox slot="start" [checked]="routine.completado">
+          <!-- El checkbox se mostrará marcado si 'routine.completado' es true -->
+        </ion-checkbox>
+
+        <!-- Miniatura para mostrar la imagen de la rutina si existe -->
+        <ion-thumbnail slot="start" *ngIf="routine.imagen">
+          <!-- Solo se muestra si la rutina tiene una imagen asociada -->
+          <img [src]="routine.imagen" alt="Imagen de la rutina">
+          <!-- La fuente de la imagen se establece dinámicamente desde el objeto 'routine' -->
+        </ion-thumbnail>
+
+
+        <!-- Etiqueta que muestra la información de la rutina -->
+        <ion-label>
+          <h2>{{ routine.nombre }}</h2>
+          <p>Repeticiones: {{ routine.repeticiones }}</p>
+        </ion-label>
+      </ion-item>
+
+      <!-- Opciones disponibles al deslizar el elemento -->
+      <ion-item-options>
+        <!-- Opción para eliminar la rutina -->
+        <ion-item-option color="danger" (click)="eliminarRoutine(i)">
+          <ion-icon name="trash"></ion-icon>
+          Eliminar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
